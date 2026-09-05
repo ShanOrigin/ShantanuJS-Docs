@@ -1,0 +1,412 @@
+@import './tokens.css';
+@import './neumorphism.css';
+
+/* Universal Reset & Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--bg-app);
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 800; }
+h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
+h3 { font-size: clamp(1.2rem, 2vw, 1.6rem); }
+h4 { font-size: 1.2rem; }
+
+p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-secondary);
+}
+
+code, pre {
+  font-family: var(--font-mono);
+}
+
+/* Layout Containers */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-app);
+}
+
+.main-content {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-4);
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-surface-sunken);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-dim);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Continuously Flowing Multi-Color Gradient for ShantanuJS Hero Branding */
+@keyframes flowingGradientContinuous {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Subtle Sine-Wave Inspired Vertical Wave Motion */
+@keyframes subtleSineWave {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.shantanu-brand-gradient {
+  background: linear-gradient(
+    90deg,
+    #6366f1 0%,
+    #0ea5e9 20%,
+    #a855f7 40%,
+    #ec4899 60%,
+    #38bdf8 80%,
+    #6366f1 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: flowingGradientContinuous 7s ease-in-out infinite;
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+}
+
+.shantanu-brand-motion {
+  display: inline-block;
+  animation: subtleSineWave 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Feature Card Hover Polish: Title Gradient Transition & Icon Scale */
+.feature-card {
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.feature-card .feature-card-icon {
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  will-change: transform;
+}
+
+.feature-card .feature-card-title {
+  transition: color var(--transition-fast);
+  background-size: 200% auto;
+}
+
+.feature-card:hover .feature-card-icon {
+  transform: scale(1.08);
+  box-shadow: var(--neu-raised-hover);
+}
+
+.feature-card:hover .feature-card-title {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .shantanu-brand-gradient,
+  .shantanu-letter-gradient {
+    animation: none !important;
+    background-position: 0% 50% !important;
+  }
+  .shantanu-brand-motion,
+  .shantanu-letter-wave {
+    animation: none !important;
+    transform: none !important;
+  }
+  .capability-icon-ripple {
+    animation: none !important;
+    display: none !important;
+  }
+  .nav-animated-letter {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Navbar Sequential Letter Animation */
+@keyframes navLetterSequence {
+  0%, 10% {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+  20%, 80% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  90%, 100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+
+.nav-animated-letter {
+  display: inline-block;
+  animation: navLetterSequence 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Hero Letter Sine Wave */
+@keyframes heroLetterSineWave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.shantanu-letter-wave {
+  display: inline-block;
+  animation: heroLetterSineWave 4.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.shantanu-letter-gradient {
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: flowingGradientContinuous 6s ease-in-out infinite;
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+/* Hero Action Buttons */
+.hero-action-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  box-shadow: var(--neu-raised);
+}
+
+.hero-action-btn:hover {
+  box-shadow: var(--neu-raised-hover);
+  transform: translateY(-1px);
+}
+
+.hero-action-btn:active {
+  box-shadow: var(--neu-inset);
+  transform: translateY(0);
+}
+
+.hero-action-btn .btn-text {
+  transition: all var(--transition-fast);
+}
+
+.hero-action-btn:hover .btn-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-action-btn .btn-icon-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+
+.hero-action-btn .btn-icon-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  border: 2px solid var(--accent-primary);
+  transform: scale(0.6);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-action-btn:hover .btn-icon-wrapper::after {
+  animation: heroIconRipple 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes heroIconRipple {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Capability Continuous Icon Ripple */
+@keyframes iconRippleContinuous {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(1.65);
+    opacity: 0;
+  }
+}
+
+.capability-icon-container {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+  transition: transform var(--transition-normal);
+  overflow: visible !important;
+}
+
+.capability-icon-ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  border: 1.5px solid currentColor;
+  animation: iconRippleContinuous 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  pointer-events: none;
+}
+
+.feature-card:hover .capability-icon-container {
+  transform: scale(1.06);
+}
+
+/* Grid Utilities */
+.grid-responsive-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-6);
+}
+
+.grid-responsive-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+
+.grid-capabilities-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+@media (max-width: 1024px) {
+  .grid-capabilities-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-capabilities-4 {
+    grid-template-columns: 1fr;
+  }
+}
